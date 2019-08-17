@@ -1,0 +1,12 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+apply from: "$rootDir/module.gradle"
+apply from: "$rootDir/publish.gradle"
+
+dependencies {
+    api 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+}

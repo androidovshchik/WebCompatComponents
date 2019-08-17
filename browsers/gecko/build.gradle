@@ -1,0 +1,33 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+apply from: "$rootDir/module.gradle"
+apply from: "$rootDir/publish.gradle"
+
+android {
+    flavorDimensions "abi"
+    productFlavors {
+        x86 { 
+            dimension "abi"
+        }
+        x86_64 {
+            dimension "abi"
+        }
+        arm {
+            dimension "abi"
+        }
+        aarch64 {
+            dimension "abi"
+        }
+    }
+}
+
+dependencies {
+    implementation project(':appcompat')
+    x86Implementation "org.mozilla.geckoview:geckoview-nightly-x86:$gecko_version"
+    x86_64Implementation "org.mozilla.geckoview:geckoview-nightly-x86_64:$gecko_version"
+    armImplementation "org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:$gecko_version"
+    aarch64Implementation "org.mozilla.geckoview:geckoview-nightly-arm64-v8a:$gecko_version"
+}

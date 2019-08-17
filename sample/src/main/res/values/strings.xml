@@ -1,0 +1,8 @@
+<!--
+  ~ AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+  ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">AppCompatWebComponents</string>
+</resources>

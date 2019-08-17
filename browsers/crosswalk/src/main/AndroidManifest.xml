@@ -1,0 +1,6 @@
+<!--
+  ~ AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+  ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+  -->
+
+<manifest package="androidovshchik.webcomponents.crosswalk" />

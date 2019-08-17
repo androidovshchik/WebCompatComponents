@@ -1,0 +1,44 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+apply from: "$rootDir/module.gradle"
+apply from: "$rootDir/publish.gradle"
+
+android {
+    sourceSets {
+        main.java.srcDirs += 'src/lite/kotlin'
+    }
+    publishNonDefault true
+    flavorDimensions "default"
+    productFlavors {
+        full {
+            minSdkVersion 16
+            buildConfigField("boolean", "SHARED", "false")
+            buildConfigField("boolean", "LITE", "false")
+        }
+        shared {
+            minSdkVersion 16
+            buildConfigField("boolean", "SHARED", "true")
+            buildConfigField("boolean", "LITE", "false")
+        }
+        lite {
+            buildConfigField("boolean", "SHARED", "false")
+            buildConfigField("boolean", "LITE", "true")
+        }
+    }
+}
+
+dependencies {
+    implementation project(':appcompat')
+    fullApi ('org.xwalk:xwalk_core_library:23.53.589.4') {
+        exclude group: 'com.android.support'
+    }
+    sharedApi ('org.xwalk:xwalk_shared_library:23.53.589.4') {
+        exclude group: 'com.android.support'
+    }
+    liteApi ('org.xwalk:xwalk_core_library_canary:17.46.460.1') {
+        exclude group: 'com.android.support'
+    }
+}

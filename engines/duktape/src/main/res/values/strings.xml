@@ -1,0 +1,8 @@
+<!--
+  ~ AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+  ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+  -->
+
+<resources>
+    <string name="app_name">Duktape</string>
+</resources>

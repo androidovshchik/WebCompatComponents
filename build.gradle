@@ -1,0 +1,57 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+buildscript {
+	ext {
+		kotlin_version = '1.3.40'
+		gecko_version = '66.0.20190107093040'
+	}
+	repositories {
+		maven {
+			url 'https://maven.google.com'
+		}
+		jcenter {
+			url "http://jcenter.bintray.com"
+		}
+		mavenCentral()
+        google()
+    }
+	dependencies {
+		classpath 'com.android.tools.build:gradle:3.4.2'
+		classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+
+allprojects {
+	repositories {
+		maven {
+			url 'https://maven.google.com'
+		}
+		jcenter {
+			url "http://jcenter.bintray.com"
+		}
+		maven {
+			url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+		}
+		maven {
+			url 'https://download.01.org/crosswalk/releases/crosswalk-lite/android/maven2'
+		}
+		maven {
+			url "https://maven.mozilla.org/maven2"
+		}
+		mavenLocal()
+	}
+}
+
+task clean(type: Delete) {
+	delete "$rootDir/build"
+	delete "$rootDir/appcompat/build"
+	delete "$rootDir/material/build"
+	delete "$rootDir/cordova/build"
+	delete "$rootDir/crosswalk/build"
+	delete "$rootDir/gecko/build"
+	delete "$rootDir/sample/build"
+}

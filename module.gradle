@@ -1,0 +1,34 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+	compileSdkVersion COMPILE_SDK_VERSION as int
+	defaultConfig {
+		minSdkVersion MIN_SDK_VERSION as int
+		targetSdkVersion TARGET_SDK_VERSION as int
+		versionCode VERSION_CODE as int
+		versionName VERSION_NAME
+	}
+	sourceSets {
+		main.java.srcDirs += 'src/main/kotlin'
+	}
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+}
+
+dependencies {
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}

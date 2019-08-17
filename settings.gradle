@@ -1,0 +1,8 @@
+/*
+ * AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ */
+
+include ':appcompat', ':sample',
+   ':browsers:crosswalk', ':browsers:gecko', ':browsers:servo', ':browsers:native',
+   ':engines:duktape', ':engines:jsevaluator', ':engines:j2v8'
