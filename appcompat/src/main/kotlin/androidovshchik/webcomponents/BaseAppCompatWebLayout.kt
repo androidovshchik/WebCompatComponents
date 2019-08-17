@@ -13,7 +13,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
-import androidovshchik.webcomponents.extensions.checkThread
+import androidovshchik.webcomponents.extensions.isUIThread
 import androidovshchik.webcomponents.models.WebPage
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
@@ -36,23 +36,19 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
 
     override val page: WebPage
         get() {
-            checkThread()
             return webView.page
         }
 
     override val history: ArrayList<out WebPage>
         get() {
-            checkThread()
             return webView.history
         }
 
     override var listener: IWebViewListener?
         get() {
-            checkThread()
             return webView.listener
         }
         set(value) {
-            checkThread()
             webView.listener = value
         }
 
@@ -83,47 +79,57 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
     }
 
     override fun onResume() {
-        checkThread()
-        webView.onResume()
+        if (isUIThread) {
+            webView.onResume()
+        }
     }
 
     override fun loadUrl(url: String?) {
-        checkThread()
-        webView.loadUrl(url)
+        if (isUIThread) {
+            webView.loadUrl(url)
+        }
     }
 
     override fun reload() {
-        checkThread()
-        webView.reload()
+        if (isUIThread) {
+            webView.reload()
+        }
     }
 
     override fun navigateBack(): Boolean {
-        checkThread()
-        return webView.navigateBack()
+        if (isUIThread) {
+            return webView.navigateBack()
+        }
+        return false
     }
 
     override fun navigateForward(): Boolean {
-        checkThread()
-        return webView.navigateForward()
+        if (isUIThread) {
+            return webView.navigateForward()
+        }
+        return false
     }
 
     override fun clearHistory() {
-        checkThread()
-        webView.clearHistory()
+        if (isUIThread) {
+            webView.clearHistory()
+        }
     }
 
     override fun onPause() {
-        checkThread()
-        webView.onPause()
+        if (isUIThread) {
+            webView.onPause()
+        }
     }
 
     override fun onDestroy() {
-        checkThread()
-        try {
-            removeAllViews()
-        } catch (e: Exception) {
+        if (isUIThread) {
+            try {
+                removeAllViews()
+            } catch (e: Exception) {
+            }
+            webView.onDestroy()
         }
-        webView.onDestroy()
     }
 
     override fun hasOverlappingRendering(): Boolean {

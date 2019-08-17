@@ -3,6 +3,8 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package androidovshchik.webcomponents.exceptions
+package androidovshchik.webcomponents
 
-class InvalidThreadException : Exception("All methods must be called on the UI thread")
+import android.webkit.WebChromeClient
+
+open class ChromeClient : WebChromeClient()

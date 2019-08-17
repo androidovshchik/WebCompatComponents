@@ -11,14 +11,16 @@ import android.os.Looper
 import androidovshchik.webcomponents.IAppCompatWebView
 import androidovshchik.webcomponents.IWebViewListener
 import androidovshchik.webcomponents.WebViewHelper
-import androidovshchik.webcomponents.exceptions.InvalidThreadException
 
 fun IAppCompatWebView.setWebViewListener(init: IWebViewListener.() -> Unit) {
     listener = WebViewHelper().apply(init)
 }
 
-fun IAppCompatWebView.checkThread() {
-    if (Looper.myLooper() != Looper.getMainLooper()) {
-        throw InvalidThreadException()
+inline val IAppCompatWebView.isUIThread: Boolean
+    get() {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            println("This method must be called on the UI thread")
+            return false
+        }
+        return true
     }
-}

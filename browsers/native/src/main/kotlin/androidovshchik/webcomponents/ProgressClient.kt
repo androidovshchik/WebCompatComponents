@@ -5,6 +5,6 @@
 
 package androidovshchik.webcomponents
 
-import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
 
-internal class NativeChromeClient : WebChromeClient()
+open class ProgressClient : WebViewClient()

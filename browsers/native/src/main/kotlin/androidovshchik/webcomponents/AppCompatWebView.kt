@@ -21,14 +21,13 @@ open class AppCompatWebView @JvmOverloads constructor(
 
     override val engine: WebEngine
         get() {
-            checkThread()
             return WebEngine.NATIVE
         }
 
     override val page: WebPage
         get() {
             return copyBackForwardList().currentItem?.let {
-                WebPage(it.url, it.favicon, it.title)
+                WebPage(it.url, 0, it.favicon, it.title)
             } ?: WebPage()
         }
 
@@ -55,9 +54,11 @@ open class AppCompatWebView @JvmOverloads constructor(
         if (isInEditMode) {
             return
         }
-        settings.javaScriptEnabled = true
-        webViewClient = NativeViewClient()
-        webChromeClient = NativeChromeClient()
+        settings.apply {
+            javaScriptEnabled = true
+        }
+        webViewClient = ProgressClient()
+        webChromeClient = ChromeClient()
     }
 
     override fun onResume() {

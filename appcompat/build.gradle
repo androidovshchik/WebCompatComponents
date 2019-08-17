@@ -10,3 +10,8 @@ dependencies {
     api 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 }
+
+afterEvaluate {
+    generateReleaseBuildConfig.enabled = false
+    generateDebugBuildConfig.enabled = false
+}

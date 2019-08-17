@@ -14,6 +14,7 @@ import android.view.MenuItem
 import androidovshchik.webcomponents.appcompat.R
 import androidovshchik.webcomponents.extensions.openBrowser
 import androidovshchik.webcomponents.extensions.showToast
+import androidovshchik.webcomponents.models.WebPage
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 
@@ -26,9 +27,11 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+        if (intent.getBooleanExtra(EXTRA_ARROW_BACK, true)) {
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setDisplayShowHomeEnabled(true)
+            }
         }
     }
 
@@ -40,7 +43,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onReadyEvent() {
-        webLayout.loadUrl(intent.getStringExtra(EXTRA_URL) ?: BLANK_PAGE)
+        webLayout.loadUrl(intent.getStringExtra(EXTRA_URL) ?: WebPage.BLANK_PAGE)
     }
 
     override fun onFatalError() {
@@ -78,9 +81,8 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
                     showToast(it.message)
                 }
             }
-            else -> return super.onOptionsItemSelected(item)
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
@@ -99,5 +101,12 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     override fun onDestroy() {
         webLayout.onDestroy()
         super.onDestroy()
+    }
+
+    companion object {
+
+        const val EXTRA_URL = "extra_url"
+
+        const val EXTRA_ARROW_BACK = "extra_arrow_back"
     }
 }

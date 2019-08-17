@@ -6,9 +6,8 @@
 package androidovshchik.webcomponents.models
 
 import android.graphics.Bitmap
-import androidovshchik.webcomponents.BLANK_PAGE
 
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 open class WebPage {
 
     var url = BLANK_PAGE
@@ -36,5 +35,10 @@ open class WebPage {
             icon?.recycle()
         } catch (e: Throwable) {
         }
+    }
+
+    companion object {
+
+        const val BLANK_PAGE = "about:blank"
     }
 }

@@ -39,9 +39,6 @@ fun Context.openYandexBrowser(url: CharSequence?): Throwable? {
 }
 
 fun Context.openBrowser(url: CharSequence?, vararg packages: String): Throwable? {
-    if (url == null) {
-        return NullPointerException()
-    }
     Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())).run {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (packages.isEmpty()) {

@@ -25,6 +25,6 @@ open class AppCompatWebActivity : BaseAppCompatWebActivity() {
             )
         }
         setContentView(webLayout)
-        onReady()
+        onReadyEvent()
     }
 }

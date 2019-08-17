@@ -10,7 +10,6 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import androidovshchik.webcomponents.extensions.checkThread
 import androidovshchik.webcomponents.models.WebEngine
 
 @Suppress("LeakingThis")
@@ -18,7 +17,6 @@ open class AppCompatWebLayout : BaseAppCompatWebLayout {
 
     override val engine: WebEngine
         get() {
-            checkThread()
             return WebEngine.NATIVE
         }
 
