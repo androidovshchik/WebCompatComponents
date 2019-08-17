@@ -15,7 +15,7 @@ interface IAppCompatWebActivity {
 
     var isReady: Boolean
 
-    fun onReady()
+    fun onReadyEvent()
 
-    fun onFailure()
+    fun onFatalError()
 }

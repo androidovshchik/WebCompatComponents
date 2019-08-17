@@ -21,7 +21,7 @@ interface IAppCompatWebView {
     var listener: IWebViewListener?
 
     /**
-     * It is called at [BaseAppCompatWebActivity.onPostResume]
+     * Consider that it should be called at [android.app.Activity.onPostResume]
      */
     fun onResume()
 

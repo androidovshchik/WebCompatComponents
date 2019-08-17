@@ -14,10 +14,6 @@ import android.net.Uri
 import android.widget.Toast
 import androidovshchik.webcomponents.exceptions.AppNotFoundException
 
-internal fun Context.showToast(message: CharSequence?, delay: Int = Toast.LENGTH_SHORT) = Toast
-    .makeText(applicationContext, message.toString(), delay)
-    .show()
-
 fun Context.openChrome(url: CharSequence?): Throwable? {
     return openBrowser(url, "com.android.chrome", "com.android.beta", "com.android.dev",
         "com.android.canary")
@@ -43,10 +39,13 @@ fun Context.openYandexBrowser(url: CharSequence?): Throwable? {
 }
 
 fun Context.openBrowser(url: CharSequence?, vararg packages: String): Throwable? {
-    Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())).let {
-        it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    if (url == null) {
+        return NullPointerException()
+    }
+    Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())).run {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (packages.isEmpty()) {
-            return tryStartActivity(it)
+            return tryStartActivity(this)
         }
         // todo intent filter browser
         val apps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
@@ -55,8 +54,8 @@ fun Context.openBrowser(url: CharSequence?, vararg packages: String): Throwable?
                 continue
             }
             if (app.packageName in packages) {
-                it.setPackage(app.packageName)
-                return tryStartActivity(it)
+                setPackage(app.packageName)
+                return tryStartActivity(this)
             }
         }
         return AppNotFoundException()
@@ -71,3 +70,7 @@ private fun Context.tryStartActivity(intent: Intent): Throwable? {
         e
     }
 }
+
+internal fun Context.showToast(message: CharSequence?, delay: Int = Toast.LENGTH_SHORT) = Toast
+    .makeText(applicationContext, message.toString(), delay)
+    .show()

@@ -7,13 +7,13 @@
 
 package androidovshchik.webcomponents
 
-import android.graphics.Bitmap
+import androidovshchik.webcomponents.models.WebPage
 
 interface IWebViewListener {
 
-    fun onPageStarted(url: String, favicon: Bitmap?)
+    fun onPageStarted(page: WebPage)
 
-    fun onPageFinished(url: String)
+    fun onPageFinished(page: WebPage)
 
-    fun onPageError(url: String, code: Int, description: String)
+    fun onPageError(page: WebPage)
 }

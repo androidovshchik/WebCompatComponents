@@ -6,25 +6,35 @@
 package androidovshchik.webcomponents.models
 
 import android.graphics.Bitmap
-import androidovshchik.webcomponents.Constant
+import androidovshchik.webcomponents.BLANK_PAGE
 
 @Suppress("unused")
 open class WebPage {
 
-    var url = Constant.BLANK_PAGE
+    var url = BLANK_PAGE
+
+    var code = 0
 
     var icon: Bitmap? = null
 
-    var title = url
+    var title = ""
 
     var description = ""
 
     constructor()
 
-    constructor(url: String, icon: Bitmap? = null, title: String = url, description: String = "") {
+    constructor(url: String, code: Int = 0, icon: Bitmap? = null, title: String = "", description: String = "") {
         this.url = url
-        this.icon = icon
+        this.code = code
+        this.icon = icon?.copy(icon.config, true)
         this.title = title
         this.description = description
+    }
+
+    open fun release() {
+        try {
+            icon?.recycle()
+        } catch (e: Throwable) {
+        }
     }
 }

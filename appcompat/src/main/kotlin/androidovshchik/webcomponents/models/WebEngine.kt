@@ -6,5 +6,8 @@
 package androidovshchik.webcomponents.models
 
 enum class WebEngine {
-    NATIVE, CROSSWALK, GECKO, SERVO
+    NATIVE,
+    CROSSWALK,
+    GECKO,
+    SERVO
 }

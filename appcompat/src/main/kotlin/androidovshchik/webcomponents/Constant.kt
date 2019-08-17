@@ -3,14 +3,13 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
+@file:Suppress("unused")
+
 package androidovshchik.webcomponents
 
-object Constant {
+/**
+ * Extra param to [BaseAppCompatWebActivity]
+ */
+const val EXTRA_URL = "extra_url"
 
-    /**
-     * Pass url to [BaseAppCompatWebActivity]
-     */
-    const val EXTRA_URL = "web_activity_extra_url"
-
-    const val BLANK_PAGE = "about:blank"
-}
+const val BLANK_PAGE = "about:blank"

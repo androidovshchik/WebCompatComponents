@@ -33,17 +33,17 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onPostResume() {
-        super.onPostResume()
         if (isReady) {
             webLayout.onResume()
         }
+        super.onPostResume()
     }
 
-    override fun onReady() {
-        webLayout.loadUrl(intent.getStringExtra(Constant.EXTRA_URL) ?: Constant.BLANK_PAGE)
+    override fun onReadyEvent() {
+        webLayout.loadUrl(intent.getStringExtra(EXTRA_URL) ?: BLANK_PAGE)
     }
 
-    override fun onFailure() {
+    override fun onFatalError() {
         finish()
     }
 
@@ -67,11 +67,11 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
                 clipboardManager.primaryClip = ClipData.newPlainText("", webLayout.page.url)
             }
             R.id.action_share_link -> {
-                startActivity(ShareCompat.IntentBuilder.from(this)
+                ShareCompat.IntentBuilder.from(this)
                     .setChooserTitle(R.string.web_activity_action_share_via)
                     .setType("text/plain")
                     .setText(webLayout.page.url)
-                    .createChooserIntent())
+                    .startChooser()
             }
             R.id.action_open_browser -> {
                 openBrowser(webLayout.page.url)?.let {
