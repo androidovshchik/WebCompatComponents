@@ -20,4 +20,4 @@ All contributions are welcome! If you wish to contribute, please create an issue
 
 ### License
 
-This project is licensed under the terms of the [Apache License](https://opensource.org/licenses/MIT)
+This project is licensed under the terms of the [Apache License](https://opensource.org/licenses/Apache-2.0)

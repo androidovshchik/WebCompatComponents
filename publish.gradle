@@ -6,7 +6,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'androidovshchik.webcomponents'
-version = VERSION_NAME
+version = version_name
 
 task sourcesJar(type: Jar) {
     //noinspection GrDeprecatedAPIUsage

@@ -7,12 +7,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-	compileSdkVersion COMPILE_SDK_VERSION as int
+	compileSdkVersion compile_sdk_version
 	defaultConfig {
-		minSdkVersion MIN_SDK_VERSION as int
-		targetSdkVersion TARGET_SDK_VERSION as int
-		versionCode VERSION_CODE as int
-		versionName VERSION_NAME
+		minSdkVersion min_sdk_version
+		targetSdkVersion target_sdk_version
+		versionCode version_code
+		versionName version_name
 	}
 	sourceSets {
 		main.java.srcDirs += 'src/main/kotlin'
