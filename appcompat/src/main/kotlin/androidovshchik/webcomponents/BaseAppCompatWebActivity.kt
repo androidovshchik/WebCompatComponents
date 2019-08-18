@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidovshchik.webcomponents.appcompat.R
+import androidovshchik.webcomponents.extensions.addWebViewListener
 import androidovshchik.webcomponents.extensions.openBrowser
 import androidovshchik.webcomponents.extensions.showToast
 import androidovshchik.webcomponents.models.WebPage
@@ -25,14 +26,25 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
 
     override var isReady = true
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (intent.getBooleanExtra(EXTRA_DYNAMIC_TITLE, false)) {
+            webLayout.addWebViewListener {
+                onPageFinished {
+                    title = it.title
+                }
+            }
+        }
+    }
+
     override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
         if (intent.getBooleanExtra(EXTRA_ARROW_BACK, true)) {
             supportActionBar?.apply {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
             }
         }
+        super.onPostCreate(savedInstanceState)
     }
 
     override fun onPostResume() {
@@ -59,7 +71,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.apply {
+        menu.run {
             findItem(R.id.action_reload_page).isVisible = intent.getBooleanExtra(EXTRA_MENU_RELOAD, true)
             findItem(R.id.action_copy_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_COPY, true)
             findItem(R.id.action_share_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_SHARE, true)
@@ -121,8 +133,6 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
 
         const val EXTRA_INPUT_DATA = "input_data"
 
-        const val EXTRA_TOOLBAR_TITLE = "toolbar_title"
-
         const val EXTRA_DYNAMIC_TITLE = "dynamic_title"
 
         const val EXTRA_ARROW_BACK = "arrow_back"
@@ -142,5 +152,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
         const val EXTRA_SWIPE_LAYOUT = "swipe_layout"
 
         const val EXTRA_PROGRESS_BAR = "progress_bar"
+
+        const val EXTRA_ACCENT_COLOR = "accent_color"
     }
 }

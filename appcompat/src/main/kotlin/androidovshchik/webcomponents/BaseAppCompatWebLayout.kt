@@ -44,12 +44,9 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
             return webView.history
         }
 
-    override var listener: IWebViewListener?
+    override val listeners: HashSet<IWebViewListener>
         get() {
-            return webView.listener
-        }
-        set(value) {
-            webView.listener = value
+            return webView.listeners
         }
 
     @JvmOverloads
@@ -82,7 +79,7 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
         webView.onResume()
     }
 
-    override fun load(data: String?) {
+    override fun load(data: CharSequence?) {
         webView.load(data)
     }
 

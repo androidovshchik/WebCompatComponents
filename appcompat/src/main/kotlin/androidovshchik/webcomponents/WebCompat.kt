@@ -22,6 +22,10 @@ class WebCompat {
             intent.putExtra(BaseAppCompatWebActivity.EXTRA_INPUT_DATA, data.toString())
         }
 
+        open fun dynamicTitle(enable: Boolean) = apply {
+            intent.putExtra(BaseAppCompatWebActivity.EXTRA_DYNAMIC_TITLE, enable)
+        }
+
         open fun arrowBack(enable: Boolean) = apply {
             intent.putExtra(BaseAppCompatWebActivity.EXTRA_ARROW_BACK, enable)
         }
@@ -56,6 +60,10 @@ class WebCompat {
 
         open fun progressBar(enable: Boolean) = apply {
             intent.putExtra(BaseAppCompatWebActivity.EXTRA_PROGRESS_BAR, enable)
+        }
+
+        open fun accentColor(color: Int) = apply {
+            intent.putExtra(BaseAppCompatWebActivity.EXTRA_ACCENT_COLOR, color)
         }
 
         open fun startActivity(context: Context?) = context?.tryStartActivity(intent)

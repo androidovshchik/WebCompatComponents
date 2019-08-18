@@ -18,14 +18,14 @@ interface IAppCompatWebView {
 
     val history: ArrayList<out WebPage>
 
-    var listener: IWebViewListener?
+    val listeners: HashSet<IWebViewListener>
 
     /**
      * Consider that it should be called at [android.app.Activity.onPostResume]
      */
     fun onResume()
 
-    fun load(data: String?)
+    fun load(data: CharSequence?)
 
     fun reload()
 

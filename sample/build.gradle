@@ -54,6 +54,7 @@ android {
 		}
 	}
     buildTypes {
+		debug
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
@@ -75,6 +76,5 @@ dependencies {
 	implementation 'com.jakewharton.timber:timber:4.7.1'
 	implementation project(':appcompat')
 	implementation project(':browsers:gecko')
-	//implementation project(':crosswalk')
 	//implementation "androidovshchik.webcomponents:gecko:$VERSION_NAME"
 }
