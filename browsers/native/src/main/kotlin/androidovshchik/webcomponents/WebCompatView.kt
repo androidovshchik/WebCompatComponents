@@ -11,13 +11,12 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.webkit.WebView
 import androidovshchik.webcomponents.extensions.checkThread
-import androidovshchik.webcomponents.models.WebEngine
 import androidovshchik.webcomponents.models.WebPage
 
 @Suppress("LeakingThis", "unused", "UNUSED_PARAMETER")
-open class AppCompatWebView @JvmOverloads constructor(
+open class WebCompatView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : WebView(context, attrs, defStyleAttr), IAppCompatWebView {
+) : WebView(context, attrs, defStyleAttr), IWebCompatView {
 
     override val engine: WebEngine
         get() {
@@ -46,11 +45,11 @@ open class AppCompatWebView @JvmOverloads constructor(
     override var listener: IWebViewListener? = null
 
     init {
-        init(AppCompatWebView::class.java)
+        init(WebCompatView::class.java)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    open fun init(clss: Class<out IAppCompatWebView>) {
+    open fun init(clss: Class<out IWebCompatView>) {
         if (isInEditMode) {
             return
         }

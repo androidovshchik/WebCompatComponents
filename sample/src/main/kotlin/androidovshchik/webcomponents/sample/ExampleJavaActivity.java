@@ -6,15 +6,10 @@
 package androidovshchik.webcomponents.sample;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import androidovshchik.webcomponents.AppCompatWebLayout;
-import androidovshchik.webcomponents.IWebViewListener;
 
 @SuppressLint("Registered")
 public class ExampleJavaActivity extends AppCompatActivity {
@@ -22,23 +17,23 @@ public class ExampleJavaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppCompatWebLayout webLayout = new AppCompatWebLayout(this);
+        /*WebCompatLayout webLayout = new WebCompatLayout(this);
         webLayout.setListener(new IWebViewListener() {
 
             @Override
-            public void onPageStarted(@NonNull String url, @Nullable Bitmap favicon) {
+            public void onLoadStarted(@NonNull String url, @Nullable Bitmap favicon) {
 
             }
 
             @Override
-            public void onPageFinished(@NonNull String url) {
+            public void onLoadFinished(@NonNull String url) {
 
             }
 
             @Override
-            public void onPageError(@NonNull String url, int code, @NonNull String description) {
+            public void onLoadError(@NonNull String url, int code, @NonNull String description) {
 
             }
-        });
+        });*/
     }
 }

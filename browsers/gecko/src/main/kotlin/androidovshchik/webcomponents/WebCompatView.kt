@@ -8,39 +8,35 @@ package androidovshchik.webcomponents
 import android.content.Context
 import android.view.ViewGroup
 import androidovshchik.webcomponents.crosswalk.BuildConfig
-import androidovshchik.webcomponents.exceptions.InvalidThreadException
-import androidovshchik.webcomponents.extensions.checkThread
-import androidovshchik.webcomponents.models.WebEngine
 import androidovshchik.webcomponents.models.WebPage
 import org.xwalk.core.XWalkNavigationHistory
 import org.xwalk.core.XWalkView
 
 @Suppress("LeakingThis", "unused")
-open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWebView {
+open class WebCompatView(context: Context) : XWalkView(context), IWebCompatView {
 
     override val engine: WebEngine
         get() {
-            checkThread()
             return WebEngine.CROSSWALK
         }
 
     override val page: WebPage
         get() {
-            checkThread()
+            //checkThread()
             return navigationHistory.currentItem?.let {
-                WebPage(it.url, null, it.title)
+                WebPage()//WebPage(it.url, null, it.title)
             } ?: WebPage()
         }
 
     override val history: ArrayList<out WebPage>
-        @Throws(InvalidThreadException::class)
+        //@Throws(InvalidThreadException::class)
         get() {
-            checkThread()
+            //checkThread()
             val size = navigationHistory.size()
             val pages = arrayListOf<WebPage>()
             for (i in 0 until size) {
                 navigationHistory.getItemAt(i)?.let {
-                    pages.add(WebPage(it.url, null, it.title))
+                    //pages.add(WebPage(it.url, null, it.title))
                 }
             }
             return pages
@@ -49,10 +45,10 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
     override var listener: IWebViewListener? = null
 
     init {
-        init(AppCompatWebView::class.java)
+        init(WebCompatView::class.java)
     }
 
-    open fun init(clss: Class<out IAppCompatWebView>) {
+    open fun init(clss: Class<out IWebCompatView>) {
         if (isInEditMode) {
             return
         }
@@ -60,9 +56,9 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
         setResourceClient(CrosswalkResourceClient(this))
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun onResume() {
-        checkThread()
+        //checkThread()
         if (!BuildConfig.LITE) {
             // unsupported in lite version
             resumeTimers()
@@ -70,21 +66,21 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
     }
 
     @Suppress("DEPRECATION")
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun loadUrl(url: String?) {
-        checkThread()
+        //checkThread()
         load(url.toString(), null)
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun reload() {
-        checkThread()
+        //checkThread()
         reload(RELOAD_NORMAL)
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun navigateBack(): Boolean {
-        checkThread()
+        //checkThread()
         return if (navigationHistory.canGoBack()) {
             navigationHistory.navigate(XWalkNavigationHistory.Direction.BACKWARD, 1)
             true
@@ -93,9 +89,9 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
         }
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun navigateForward(): Boolean {
-        checkThread()
+        //checkThread()
         return if (navigationHistory.canGoForward()) {
             navigationHistory.navigate(XWalkNavigationHistory.Direction.FORWARD, 1)
             true
@@ -104,21 +100,21 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
         }
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun clearHistory() {
-        checkThread()
+        //checkThread()
         navigationHistory.clear()
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun onPause() {
-        checkThread()
+        //checkThread()
         pauseTimers()
     }
 
-    @Throws(InvalidThreadException::class)
+    //@Throws(InvalidThreadException::class)
     override fun onDestroy() {
-        checkThread()
+        //checkThread()
         try {
             (parent as ViewGroup?)?.removeView(this)
         } catch (e: Exception) {

@@ -7,7 +7,7 @@ apply from: "$rootDir/module.gradle"
 apply from: "$rootDir/publish.gradle"
 
 dependencies {
-    implementation project(':appcompat')
+    implementation project(':webcompat')
 }
 
 afterEvaluate {

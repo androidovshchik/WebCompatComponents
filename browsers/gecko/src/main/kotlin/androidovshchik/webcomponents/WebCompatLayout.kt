@@ -10,17 +10,16 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import androidovshchik.webcomponents.models.WebEngine
 
 @Suppress("LeakingThis")
-open class AppCompatWebLayout : BaseAppCompatWebLayout {
+open class WebCompatLayout : BaseWebCompatLayout {
 
     override val engine: WebEngine
         get() {
-            return WebEngine.NATIVE
+            return WebEngine.CROSSWALK
         }
 
-    override var webView: IAppCompatWebView = AppCompatWebView(context).apply {
+    var webCompatView: IWebCompatView = WebCompatView(context).apply {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
     }
 
@@ -30,7 +29,7 @@ open class AppCompatWebLayout : BaseAppCompatWebLayout {
         attrs,
         defStyleAttr
     ) {
-        init(AppCompatWebLayout::class.java)
+        init(WebCompatLayout::class.java)
     }
 
     @Suppress("unused")
@@ -41,12 +40,12 @@ open class AppCompatWebLayout : BaseAppCompatWebLayout {
         defStyleAttr,
         defStyleRes
     ) {
-        init(AppCompatWebLayout::class.java)
+        init(WebCompatLayout::class.java)
     }
 
-    override fun init(clss: Class<out IAppCompatWebView>) {
-        if (clss == AppCompatWebLayout::class.java) {
-            frameLayout.addView(webView as View, 0)
+    override fun init(clss: Class<out IWebCompatView>) {
+        if (clss == WebCompatLayout::class.java) {
+            frameLayout.addView(webCompatView as View, 0)
         } else {
             super.init(clss)
         }

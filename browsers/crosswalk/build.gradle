@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation project(':appcompat')
+    implementation project(':webcompat')
     // contains only armeabi-v7a and x86 binaries
     coreApi ("org.xwalk:xwalk_core_library:$crosswalk_version") {
         exclude group: 'com.android.support'

@@ -8,13 +8,12 @@ package androidovshchik.webcomponents
 import android.content.Context
 import android.view.ViewGroup
 import androidovshchik.webcomponents.crosswalk.BuildConfig
-import androidovshchik.webcomponents.models.WebEngine
 import androidovshchik.webcomponents.models.WebPage
 import org.xwalk.core.XWalkNavigationHistory
 import org.xwalk.core.XWalkView
 
 @Suppress("LeakingThis", "unused")
-open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWebView {
+open class WebCompatView(context: Context) : XWalkView(context), IWebCompatView {
 
     override val engine: WebEngine
         get() {
@@ -46,10 +45,10 @@ open class AppCompatWebView(context: Context) : XWalkView(context), IAppCompatWe
     override var listener: IWebViewListener? = null
 
     init {
-        init(AppCompatWebView::class.java)
+        init(WebCompatView::class.java)
     }
 
-    open fun init(clss: Class<out IAppCompatWebView>) {
+    open fun init(clss: Class<out IWebCompatView>) {
         if (isInEditMode) {
             return
         }

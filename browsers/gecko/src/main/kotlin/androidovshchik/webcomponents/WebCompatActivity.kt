@@ -7,16 +7,15 @@ package androidovshchik.webcomponents
 
 import android.os.Bundle
 import android.view.ViewGroup
-import androidovshchik.webcomponents.models.WebEngine
 import org.xwalk.core.XWalkActivityDelegate
 
 @Suppress("unused", "UNUSED_PARAMETER")
-open class AppCompatWebActivity : BaseAppCompatWebActivity() {
+open class WebCompatActivity : BaseWebCompatActivity() {
 
     override val engine
         get() = WebEngine.CROSSWALK
 
-    override lateinit var webLayout: BaseAppCompatWebLayout
+    lateinit var webLayout: BaseWebCompatLayout
 
     override var isReady
         get() = activityDelegate.isXWalkReady
@@ -27,11 +26,11 @@ open class AppCompatWebActivity : BaseAppCompatWebActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityDelegate = XWalkActivityDelegate(this, Runnable {
-            onFailure()
+            onFatalError()
         }, Runnable {
-            onReady()
+            onReadyEvent()
         })
-        webLayout = AppCompatWebLayout(this).apply {
+        webLayout = WebCompatLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
