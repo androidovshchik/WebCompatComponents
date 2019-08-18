@@ -105,8 +105,24 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
 
     companion object {
 
-        const val EXTRA_URL = "extra_url"
+        const val EXTRA_INPUT_DATA = "input_data"
 
-        const val EXTRA_ARROW_BACK = "extra_arrow_back"
+        const val EXTRA_ARROW_BACK = "arrow_back"
+
+        const val EXTRA_NAVIGATE_BACK = "navigate_back"
+
+        const val EXTRA_OPTIONS_MENU = "options_menu"
+
+        const val EXTRA_MENU_RELOAD = "menu_reload"
+
+        const val EXTRA_MENU_COPY = "menu_copy"
+
+        const val EXTRA_MENU_SHARE = "menu_share"
+
+        const val EXTRA_MENU_BROWSER = "menu_browser"
+
+        const val EXTRA_SWIPE_LAYOUT = "swipe_layout"
+
+        const val EXTRA_PROGRESS_BAR = "progress_bar"
     }
 }

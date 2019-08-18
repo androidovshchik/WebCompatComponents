@@ -59,7 +59,7 @@ fun Context.openBrowser(url: CharSequence?, vararg packages: String): Throwable?
     }
 }
 
-private fun Context.tryStartActivity(intent: Intent): Throwable? {
+internal fun Context.tryStartActivity(intent: Intent): Throwable? {
     return try {
         startActivity(intent)
         null

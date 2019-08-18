@@ -79,47 +79,23 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
     }
 
     override fun onResume() {
-        if (isUIThread) {
-            webView.onResume()
-        }
+        webView.onResume()
     }
 
-    override fun loadUrl(url: String?) {
-        if (isUIThread) {
-            webView.loadUrl(url)
-        }
+    override fun load(data: String?) {
+        webView.load(data)
     }
 
     override fun reload() {
-        if (isUIThread) {
-            webView.reload()
-        }
+        webView.reload()
     }
 
-    override fun navigateBack(): Boolean {
-        if (isUIThread) {
-            return webView.navigateBack()
-        }
-        return false
-    }
-
-    override fun navigateForward(): Boolean {
-        if (isUIThread) {
-            return webView.navigateForward()
-        }
-        return false
-    }
-
-    override fun clearHistory() {
-        if (isUIThread) {
-            webView.clearHistory()
-        }
+    override fun navigate(steps: Int): Boolean {
+        return webView.navigate(steps)
     }
 
     override fun onPause() {
-        if (isUIThread) {
-            webView.onPause()
-        }
+        webView.onPause()
     }
 
     override fun onDestroy() {
@@ -128,8 +104,8 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
                 removeAllViews()
             } catch (e: Exception) {
             }
-            webView.onDestroy()
         }
+        webView.onDestroy()
     }
 
     override fun hasOverlappingRendering(): Boolean {

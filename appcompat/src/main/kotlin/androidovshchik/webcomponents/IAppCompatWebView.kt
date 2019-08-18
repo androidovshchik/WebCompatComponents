@@ -25,15 +25,11 @@ interface IAppCompatWebView {
      */
     fun onResume()
 
-    fun loadUrl(url: String?)
+    fun load(data: String?)
 
     fun reload()
 
-    fun navigateBack(): Boolean
-
-    fun navigateForward(): Boolean
-
-    fun clearHistory()
+    fun navigate(steps: Int): Boolean
 
     fun onPause()
 
