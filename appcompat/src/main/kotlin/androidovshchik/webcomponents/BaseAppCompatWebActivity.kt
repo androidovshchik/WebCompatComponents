@@ -43,7 +43,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onReadyEvent() {
-        webLayout.loadUrl(intent.getStringExtra(EXTRA_URL) ?: WebPage.BLANK_PAGE)
+        webLayout.load(intent.getStringExtra(EXTRA_INPUT_DATA) ?: WebPage.BLANK_PAGE)
     }
 
     override fun onFatalError() {
@@ -51,8 +51,21 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.web_activity_menu, menu)
-        return true
+        if (intent.getBooleanExtra(EXTRA_OPTIONS_MENU, true)) {
+            menuInflater.inflate(R.menu.web_activity_menu, menu)
+            return super.onCreateOptionsMenu(menu)
+        }
+        return false
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        menu.apply {
+            findItem(R.id.action_reload_page).isVisible = intent.getBooleanExtra(EXTRA_MENU_RELOAD, true)
+            findItem(R.id.action_copy_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_COPY, true)
+            findItem(R.id.action_share_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_SHARE, true)
+            findItem(R.id.action_open_browser).isVisible = intent.getBooleanExtra(EXTRA_MENU_BROWSER, true)
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -60,14 +73,15 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
             android.R.id.home -> {
                 finish()
             }
-            R.id.action_refresh_page -> {
+            R.id.action_reload_page -> {
                 if (isReady) {
                     webLayout.reload()
                 }
             }
             R.id.action_copy_link -> {
-                val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                clipboardManager.primaryClip = ClipData.newPlainText("", webLayout.page.url)
+                (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
+                    primaryClip = ClipData.newPlainText("", webLayout.page.url)
+                }
             }
             R.id.action_share_link -> {
                 ShareCompat.IntentBuilder.from(this)
@@ -86,7 +100,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onBackPressed() {
-        if (!isReady || !webLayout.navigateBack()) {
+        if (!intent.getBooleanExtra(EXTRA_NAVIGATE_BACK, true) || !isReady || !webLayout.navigate(-1)) {
             super.onBackPressed()
         }
     }
@@ -106,6 +120,10 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     companion object {
 
         const val EXTRA_INPUT_DATA = "input_data"
+
+        const val EXTRA_TOOLBAR_TITLE = "toolbar_title"
+
+        const val EXTRA_DYNAMIC_TITLE = "dynamic_title"
 
         const val EXTRA_ARROW_BACK = "arrow_back"
 

@@ -3,8 +3,6 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-@file:Suppress("unused")
-
 package androidovshchik.webcomponents
 
 import androidovshchik.webcomponents.models.WebPage
@@ -15,8 +13,8 @@ private typealias OnPageFinished = (page: WebPage) -> Unit
 
 private typealias OnPageError = (page: WebPage) -> Unit
 
-@Suppress("MemberVisibilityCanBePrivate")
-open class WebViewHelper : IWebViewListener {
+@Suppress("MemberVisibilityCanBePrivate", "unused")
+open class WebViewListener : IWebViewListener {
 
     protected var pageStarted: OnPageStarted? = null
 

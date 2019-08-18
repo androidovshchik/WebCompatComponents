@@ -14,16 +14,20 @@ import androidovshchik.webcomponents.extensions.tryStartActivity
 class WebCompat {
 
     @Suppress("MemberVisibilityCanBePrivate")
-    open class IntentBuilder(private val context: Context) {
+    open class IntentBuilder(context: Context) {
 
         val intent = Intent(context, Class.forName("${javaClass.`package`}.AppCompatWebActivity"))
 
-        open fun inputData(data: String) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_INPUT_DATA, data)
+        open fun inputData(data: CharSequence?) = apply {
+            intent.putExtra(BaseAppCompatWebActivity.EXTRA_INPUT_DATA, data.toString())
         }
 
         open fun arrowBack(enable: Boolean) = apply {
             intent.putExtra(BaseAppCompatWebActivity.EXTRA_ARROW_BACK, enable)
+        }
+
+        open fun navigateBack(enable: Boolean) = apply {
+            intent.putExtra(BaseAppCompatWebActivity.EXTRA_NAVIGATE_BACK, enable)
         }
 
         open fun optionsMenu(enable: Boolean) = apply {
@@ -54,8 +58,6 @@ class WebCompat {
             intent.putExtra(BaseAppCompatWebActivity.EXTRA_PROGRESS_BAR, enable)
         }
 
-        open fun startActivity() {
-            context.tryStartActivity(intent)
-        }
+        open fun startActivity(context: Context?) = context?.tryStartActivity(intent)
     }
 }

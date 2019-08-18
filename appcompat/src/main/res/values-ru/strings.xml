@@ -4,7 +4,7 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
-    <string name="web_activity_menu_refresh_page">Обновить страницу</string>
+    <string name="web_activity_menu_reload_page">Обновить страницу</string>
     <string name="web_activity_menu_copy_link">Скопировать ссылку</string>
     <string name="web_activity_menu_share_link">Поделиться ссылкой</string>
     <string name="web_activity_menu_open_browser">Открыть в браузере</string>

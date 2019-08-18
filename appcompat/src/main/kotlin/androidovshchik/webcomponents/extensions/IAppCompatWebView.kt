@@ -10,10 +10,10 @@ package androidovshchik.webcomponents.extensions
 import android.os.Looper
 import androidovshchik.webcomponents.IAppCompatWebView
 import androidovshchik.webcomponents.IWebViewListener
-import androidovshchik.webcomponents.WebViewHelper
+import androidovshchik.webcomponents.WebViewListener
 
 fun IAppCompatWebView.setWebViewListener(init: IWebViewListener.() -> Unit) {
-    listener = WebViewHelper().apply(init)
+    listener = WebViewListener().apply(init)
 }
 
 inline val IAppCompatWebView.isUIThread: Boolean
