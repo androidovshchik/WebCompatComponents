@@ -13,8 +13,7 @@ class MenuActivityUI : AnkoComponent<MenuActivity> {
     override fun createView(ui: AnkoContext<MenuActivity>): View = with(ui) {
         scrollView {
             lparams(width = matchParent, height = matchParent)
-            owner.list = verticalLayout {
-            }.lparams(width = matchParent, height = wrapContent)
+            owner.list = verticalLayout().lparams(width = matchParent, height = wrapContent)
         }
     }
 }

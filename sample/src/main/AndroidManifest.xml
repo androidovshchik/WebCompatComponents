@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ExampleJavaActivity"></activity>
-        <activity android:name="androidovshchik.webcomponents.WebCompatActivity"></activity>
+        <activity
+            android:name="androidovshchik.webcomponents.WebCompatActivity"
+            android:label="WebCompatActivity"></activity>
     </application>
 </manifest>

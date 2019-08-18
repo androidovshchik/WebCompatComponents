@@ -36,6 +36,9 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
             enableSwipeLayout = intent.getBooleanExtra(EXTRA_SWIPE_LAYOUT, true)
             enableProgressBar = intent.getBooleanExtra(EXTRA_PROGRESS_BAR, true)
             accentColor = intent.getIntExtra(EXTRA_ACCENT_COLOR, true)
+            if (intent.hasExtra()) {
+
+            }
             if (intent.getBooleanExtra(EXTRA_DYNAMIC_TITLE, false)) {
                 addWebViewListener {
                     onPageFinished {
@@ -71,11 +74,11 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        menu.run {
-            findItem(R.id.action_reload_page).isVisible = intent.getBooleanExtra(EXTRA_MENU_RELOAD, true)
-            findItem(R.id.action_copy_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_COPY, true)
-            findItem(R.id.action_share_link).isVisible = intent.getBooleanExtra(EXTRA_MENU_SHARE, true)
-            findItem(R.id.action_open_browser).isVisible = intent.getBooleanExtra(EXTRA_MENU_BROWSER, true)
+        intent.run {
+            menu.findItem(R.id.action_reload_page).isVisible = getBooleanExtra(EXTRA_MENU_RELOAD, true)
+            menu.findItem(R.id.action_copy_link).isVisible = getBooleanExtra(EXTRA_MENU_COPY, true)
+            menu.findItem(R.id.action_share_link).isVisible = getBooleanExtra(EXTRA_MENU_SHARE, true)
+            menu.findItem(R.id.action_open_browser).isVisible = getBooleanExtra(EXTRA_MENU_BROWSER, true)
         }
         return super.onPrepareOptionsMenu(menu)
     }
@@ -132,27 +135,16 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
     companion object {
 
         const val EXTRA_INPUT_DATA = "input_data"
-
         const val EXTRA_DYNAMIC_TITLE = "dynamic_title"
-
         const val EXTRA_ARROW_BACK = "arrow_back"
-
         const val EXTRA_NAVIGATE_BACK = "navigate_back"
-
         const val EXTRA_OPTIONS_MENU = "options_menu"
-
         const val EXTRA_MENU_RELOAD = "menu_reload"
-
         const val EXTRA_MENU_COPY = "menu_copy"
-
         const val EXTRA_MENU_SHARE = "menu_share"
-
         const val EXTRA_MENU_BROWSER = "menu_browser"
-
         const val EXTRA_SWIPE_LAYOUT = "swipe_layout"
-
         const val EXTRA_PROGRESS_BAR = "progress_bar"
-
         const val EXTRA_ACCENT_COLOR = "accent_color"
     }
 }
