@@ -6,7 +6,7 @@
 include ':sample'
 include ':appcompat'
 include ':browsers:crosswalk'
-//include ':browsers:gecko'
+include ':browsers:gecko'
 include ':browsers:servo'
 include ':browsers:native'
 include ':engines:duktape'

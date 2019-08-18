@@ -7,22 +7,23 @@ apply from: "$rootDir/module.gradle"
 apply from: "$rootDir/publish.gradle"
 
 android {
-    flavorDimensions "type"
+    flavorDimensions 'source'
     productFlavors {
         core {
-            dimension "type"
+            dimension 'source'
             minSdkVersion 16
             buildConfigField("boolean", "SHARED", "false")
             buildConfigField("boolean", "LITE", "false")
         }
         shared {
-            dimension "type"
+            dimension 'source'
             minSdkVersion 16
             buildConfigField("boolean", "SHARED", "true")
             buildConfigField("boolean", "LITE", "false")
         }
         lite {
-            dimension "type"
+            dimension 'source'
+            minSdkVersion 14
             buildConfigField("boolean", "SHARED", "false")
             buildConfigField("boolean", "LITE", "true")
         }
@@ -31,13 +32,15 @@ android {
 
 dependencies {
     implementation project(':appcompat')
-    // only armeabi-v7a and x86
+    // contains only armeabi-v7a and x86 binaries
     coreApi ("org.xwalk:xwalk_core_library:$crosswalk_version") {
         exclude group: 'com.android.support'
     }
+    // doesn't contain binaries
     sharedApi ("org.xwalk:xwalk_shared_library:$crosswalk_version") {
         exclude group: 'com.android.support'
     }
+    // doesn't contain 64-bit binaries
     liteApi ("org.xwalk:xwalk_core_library_canary:$crosswalk_lite_version") {
         exclude group: 'com.android.support'
     }
