@@ -3,4 +3,4 @@
   ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
   -->
 
-<manifest package="androidovshchik.webcomponents.webkit" />
+<manifest package="androidovshchik.webcomponents" />

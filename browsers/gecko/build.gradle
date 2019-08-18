@@ -11,7 +11,7 @@ android {
     productFlavors {
         stable {
             dimension 'source'
-            // 32-bit architectures require 16 while 64-bit require 21
+            // 32-bit architectures require 16 while 64-bit normally require 21
             minSdkVersion 16
             buildConfigField("boolean", "BETA", "false")
             buildConfigField("boolean", "NIGHTLY", "false")
