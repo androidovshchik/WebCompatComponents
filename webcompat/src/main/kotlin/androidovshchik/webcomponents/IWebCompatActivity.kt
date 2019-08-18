@@ -7,11 +7,11 @@
 
 package androidovshchik.webcomponents
 
-import androidovshchik.webcomponents.models.WebEngine
+import androidovshchik.webcomponents.models.WebBrowser
 
 interface IWebCompatActivity {
 
-    val engine: WebEngine
+    val browser: WebBrowser
 
     var isReady: Boolean
 

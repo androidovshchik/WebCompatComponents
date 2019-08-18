@@ -14,7 +14,7 @@ import android.view.View
 @Suppress("LeakingThis")
 open class WebCompatLayout : BaseWebCompatLayout {
 
-    override val engine: WebEngine
+    override val browser: WebEngine
         get() {
             return WebEngine.CROSSWALK
         }

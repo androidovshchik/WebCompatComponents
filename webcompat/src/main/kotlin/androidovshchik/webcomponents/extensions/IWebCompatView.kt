@@ -9,14 +9,14 @@ package androidovshchik.webcomponents.extensions
 
 import android.os.Looper
 import androidovshchik.webcomponents.IWebCompatView
-import androidovshchik.webcomponents.IWebViewListener
 import androidovshchik.webcomponents.WebViewListener
 
-fun IWebCompatView.addWebViewListener(init: WebViewListener.() -> Unit): IWebViewListener {
-    return WebViewListener().apply {
-        init()
-        listeners.add(this)
+fun IWebCompatView.addWebViewListener(init: WebViewListener.() -> Unit) = WebViewListener().let {
+    it.init()
+    synchronized(this) {
+        listeners.add(it)
     }
+    it
 }
 
 inline val IWebCompatView.isUIThread: Boolean

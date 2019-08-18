@@ -7,12 +7,13 @@
 
 package androidovshchik.webcomponents
 
-import androidovshchik.webcomponents.models.WebEngine
+import androidovshchik.webcomponents.models.Batch
+import androidovshchik.webcomponents.models.WebBrowser
 import androidovshchik.webcomponents.models.WebPage
 
 interface IWebCompatView {
 
-    val engine: WebEngine
+    val browser: WebBrowser
 
     val page: WebPage
 
@@ -25,7 +26,7 @@ interface IWebCompatView {
      */
     fun onResume()
 
-    fun load(data: CharSequence?)
+    fun load(input: Batch)
 
     fun reload()
 

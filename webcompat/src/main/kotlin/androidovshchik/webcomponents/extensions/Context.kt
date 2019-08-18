@@ -39,17 +39,20 @@ fun Context.openYandexBrowser(url: CharSequence?): Throwable? {
 }
 
 fun Context.openBrowser(url: CharSequence?, vararg packages: String): Throwable? {
-    Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())).run {
+    if (url == null) {
+        return NullPointerException()
+    }
+    Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (packages.isEmpty()) {
             return tryStartActivity(this)
         }
-        // todo intent filter browser
         val apps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
         for (app in apps) {
             if (!app.enabled) {
                 continue
             }
+            // todo intent filter browser
             if (app.packageName in packages) {
                 setPackage(app.packageName)
                 return tryStartActivity(this)

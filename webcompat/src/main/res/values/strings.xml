@@ -8,5 +8,5 @@
     <string name="web_compat_menu_copy_link">Copy link</string>
     <string name="web_compat_menu_share_link">Share link</string>
     <string name="web_compat_menu_open_browser">Open in browser</string>
-    <string name="web_compat_action_share_via">Share via</string>
+    <string name="web_compat_share_via">Share via</string>
 </resources>

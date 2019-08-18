@@ -5,8 +5,3 @@
 
 package androidovshchik.webcomponents.models
 
-enum class WebEngine {
-    J2V8,
-    DUKTAPE,
-    JSEVALUATOR
-}

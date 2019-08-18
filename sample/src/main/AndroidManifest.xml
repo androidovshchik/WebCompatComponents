@@ -25,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExampleJavaActivity"></activity>
         <activity
             android:name="androidovshchik.webcomponents.WebCompatActivity"
             android:label="WebCompatActivity"></activity>

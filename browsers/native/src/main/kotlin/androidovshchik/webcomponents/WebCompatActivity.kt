@@ -7,13 +7,14 @@ package androidovshchik.webcomponents
 
 import android.os.Bundle
 import android.view.ViewGroup
+import androidovshchik.webcomponents.models.WebBrowser
 
 open class WebCompatActivity : BaseWebCompatActivity() {
 
-    override val engine
-        get() = WebEngine.NATIVE
+    override val browser
+        get() = WebBrowser.NATIVE
 
-    lateinit var webLayout: BaseWebCompatLayout
+    override lateinit var webLayout: BaseWebCompatLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,4 +7,4 @@ package androidovshchik.webcomponents
 
 import android.webkit.WebViewClient
 
-open class ProgressClient : WebViewClient()
+internal class ProgressClient : WebViewClient()

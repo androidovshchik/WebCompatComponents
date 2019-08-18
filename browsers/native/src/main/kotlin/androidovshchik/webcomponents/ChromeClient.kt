@@ -7,4 +7,4 @@ package androidovshchik.webcomponents
 
 import android.webkit.WebChromeClient
 
-open class ChromeClient : WebChromeClient()
+internal class ChromeClient : WebChromeClient()

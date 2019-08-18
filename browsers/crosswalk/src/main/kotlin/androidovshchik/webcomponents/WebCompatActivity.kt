@@ -12,7 +12,7 @@ import org.xwalk.core.XWalkActivityDelegate
 @Suppress("unused", "UNUSED_PARAMETER")
 open class WebCompatActivity : BaseWebCompatActivity() {
 
-    override val engine
+    override val browser
         get() = WebEngine.CROSSWALK
 
     override lateinit var webLayout: BaseWebCompatLayout

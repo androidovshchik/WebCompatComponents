@@ -18,7 +18,7 @@ open class WebCompatView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr), IWebCompatView {
 
-    override val engine: WebEngine
+    override val browser: WebEngine
         get() {
             return WebEngine.NATIVE
         }
@@ -66,6 +66,7 @@ open class WebCompatView @JvmOverloads constructor(
     }
 
     override fun loadUrl(url: String?) {
+        loadDataWithBaseURL()
         super.loadUrl(url.toString())
     }
 

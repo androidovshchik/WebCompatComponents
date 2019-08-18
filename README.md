@@ -1,7 +1,7 @@
-## AppCompatWebComponents
-> Collection of web components that work as it should out of the box
+## WebCompatComponents
+> Collection of web components for Android that work as it should out of the box
 
-[![Release](https://jitpack.io/v/androidovshchik/AppCompatWebComponents.svg)](https://jitpack.io/#androidovshchik/AppCompatWebComponents)
+[![Release](https://jitpack.io/v/androidovshchik/WebCompatComponents.svg)](https://jitpack.io/#androidovshchik/WebCompatComponents)
 <a href="https://www.paypal.me/mrcpp" title="Donate to this project using Paypal">
     <img src="https://img.shields.io/badge/paypal-donate-green.svg" alt="PayPal donate button"/>
 </a>
@@ -12,7 +12,7 @@
 
 ### Installation and usage
 
-Please read [wiki](https://github.com/androidovshchik/AppCompatWebComponents/wiki)
+Please read [wiki](https://github.com/androidovshchik/WebCompatComponents/wiki)
 
 ### Contributing
 

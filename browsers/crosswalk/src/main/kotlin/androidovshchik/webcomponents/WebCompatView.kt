@@ -15,7 +15,7 @@ import org.xwalk.core.XWalkView
 @Suppress("LeakingThis", "unused")
 open class WebCompatView(context: Context) : XWalkView(context), IWebCompatView {
 
-    override val engine: WebEngine
+    override val browser: WebEngine
         get() {
             return WebEngine.CROSSWALK
         }

@@ -33,11 +33,15 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
             }
         }
         webLayout.apply {
-            enableSwipeLayout = intent.getBooleanExtra(EXTRA_SWIPE_LAYOUT, true)
-            enableProgressBar = intent.getBooleanExtra(EXTRA_PROGRESS_BAR, true)
-            accentColor = intent.getIntExtra(EXTRA_ACCENT_COLOR, true)
-            if (intent.hasExtra()) {
-
+            if (intent.hasExtra(EXTRA_SWIPE_LAYOUT)) {
+                enableSwipeLayout = intent.getBooleanExtra(EXTRA_SWIPE_LAYOUT, true)
+            }
+            if (intent.hasExtra(EXTRA_PROGRESS_BAR)) {
+                enableProgressBar = intent.getBooleanExtra(EXTRA_PROGRESS_BAR, true)
+            }
+            if (intent.hasExtra(EXTRA_ACCENT_COLOR)) {
+                // todo accent color
+                accentColor = intent.getIntExtra(EXTRA_ACCENT_COLOR, 0)
             }
             if (intent.getBooleanExtra(EXTRA_DYNAMIC_TITLE, false)) {
                 addWebViewListener {
@@ -58,16 +62,20 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
     }
 
     override fun onReadyEvent() {
-        webLayout.load(intent.getStringExtra(EXTRA_INPUT_DATA))
+        if (!isFinishing) {
+            webLayout.load(intent.getStringExtra(EXTRA_INPUT_DATA))
+        }
     }
 
     override fun onFatalError() {
-        finish()
+        if (!isFinishing) {
+            finish()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (intent.getBooleanExtra(EXTRA_OPTIONS_MENU, true)) {
-            menuInflater.inflate(R.menu.web_compat_menu, menu)
+            menuInflater.inflate(R.menu.web_menu, menu)
             return super.onCreateOptionsMenu(menu)
         }
         return false
@@ -100,7 +108,7 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
             }
             R.id.action_share_link -> {
                 ShareCompat.IntentBuilder.from(this)
-                    .setChooserTitle(R.string.web_compat_action_share_via)
+                    .setChooserTitle(R.string.web_compat_share_via)
                     .setType("text/plain")
                     .setText(webLayout.page.url)
                     .startChooser()
@@ -134,17 +142,17 @@ abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
 
     companion object {
 
-        const val EXTRA_INPUT_DATA = "input_data"
-        const val EXTRA_DYNAMIC_TITLE = "dynamic_title"
-        const val EXTRA_ARROW_BACK = "arrow_back"
-        const val EXTRA_NAVIGATE_BACK = "navigate_back"
-        const val EXTRA_OPTIONS_MENU = "options_menu"
-        const val EXTRA_MENU_RELOAD = "menu_reload"
-        const val EXTRA_MENU_COPY = "menu_copy"
-        const val EXTRA_MENU_SHARE = "menu_share"
-        const val EXTRA_MENU_BROWSER = "menu_browser"
-        const val EXTRA_SWIPE_LAYOUT = "swipe_layout"
-        const val EXTRA_PROGRESS_BAR = "progress_bar"
-        const val EXTRA_ACCENT_COLOR = "accent_color"
+        const val EXTRA_INPUT_DATA = "web_extra_input_data"
+        const val EXTRA_DYNAMIC_TITLE = "web_extra_dynamic_title"
+        const val EXTRA_ARROW_BACK = "web_extra_arrow_back"
+        const val EXTRA_NAVIGATE_BACK = "web_extra_navigate_back"
+        const val EXTRA_OPTIONS_MENU = "web_extra_options_menu"
+        const val EXTRA_MENU_RELOAD = "web_extra_menu_reload"
+        const val EXTRA_MENU_COPY = "web_extra_menu_copy"
+        const val EXTRA_MENU_SHARE = "web_extra_menu_share"
+        const val EXTRA_MENU_BROWSER = "web_extra_menu_browser"
+        const val EXTRA_SWIPE_LAYOUT = "web_extra_swipe_layout"
+        const val EXTRA_PROGRESS_BAR = "web_extra_progress_bar"
+        const val EXTRA_ACCENT_COLOR = "web_extra_accent_color"
     }
 }
