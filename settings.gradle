@@ -5,6 +5,7 @@
 
 include ':sample'
 include ':webcompat'
+include ':webclient'
 include ':browsers:crosswalk'
 include ':browsers:gecko'
 include ':browsers:servo'

@@ -7,12 +7,12 @@ apply from: "$rootDir/module.gradle"
 apply from: "$rootDir/publish.gradle"
 
 dependencies {
-    api 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     implementation 'com.android.volley:volley:1.1.1'
 }
 
 afterEvaluate {
     generateDebugBuildConfig.enabled = false
     generateReleaseBuildConfig.enabled = false
+    generateDebugResValues.enabled = false
+    generateReleaseResValues.enabled = false
 }

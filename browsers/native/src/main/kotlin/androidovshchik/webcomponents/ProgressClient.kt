@@ -5,6 +5,12 @@
 
 package androidovshchik.webcomponents
 
+import android.webkit.WebView
 import android.webkit.WebViewClient
 
-internal class ProgressClient : WebViewClient()
+internal class ProgressClient : WebViewClient() {
+
+    override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+        return super.shouldOverrideUrlLoading(view, url)
+    }
+}

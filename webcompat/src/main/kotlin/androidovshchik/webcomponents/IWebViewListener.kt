@@ -11,6 +11,8 @@ import androidovshchik.webcomponents.models.WebPage
 
 interface IWebViewListener {
 
+    fun shouldOverrideLoading(page: WebPage): Boolean
+
     fun onPageStarted(page: WebPage)
 
     fun onPageFinished(page: WebPage)

@@ -5,8 +5,8 @@
 
 package androidovshchik.webcomponents.models
 
-import android.os.Parcelable
-
-open class Batch(val data: CharSequence?, baseUrl: CharSequence? = null) : Parcelable {
-
+enum class WebEngine {
+    J2V8,
+    DUKTAPE,
+    JSEVALUATOR
 }

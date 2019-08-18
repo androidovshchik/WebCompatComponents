@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+  ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+  -->
+
+<resources>
+    <declare-styleable name="WebCompatLayout">
+        <attr name="swipeLayout" format="boolean|reference" />
+        <attr name="progressBar" format="boolean|reference" />
+        <attr name="accentColor" format="color|reference" />
+    </declare-styleable>
+</resources>

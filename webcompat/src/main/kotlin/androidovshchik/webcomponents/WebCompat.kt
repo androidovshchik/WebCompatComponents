@@ -10,7 +10,7 @@ package androidovshchik.webcomponents
 import android.content.Context
 import android.content.Intent
 import androidovshchik.webcomponents.extensions.tryStartActivity
-import androidovshchik.webcomponents.models.Batch
+import androidovshchik.webcomponents.models.WebRequest
 
 class WebCompat {
 
@@ -19,11 +19,11 @@ class WebCompat {
 
         val intent = Intent(context, Class.forName("${javaClass.`package`}.WebCompatActivity"))
 
-        open fun batch(batch: Batch) = apply {
-            intent.putExtra(BaseWebCompatActivity.EXTRA_INPUT_DATA, batch)
+        open fun requests(vararg requests: WebRequest) = apply {
+            intent.putExtra(BaseWebCompatActivity.EXTRA_INPUT_DATA, requests)
         }
 
-        open fun dynamicTitle(enable: Boolean) = apply {
+        open fun pageTitle(enable: Boolean) = apply {
             intent.putExtra(BaseWebCompatActivity.EXTRA_DYNAMIC_TITLE, enable)
         }
 

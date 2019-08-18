@@ -7,17 +7,21 @@
 
 package androidovshchik.webcomponents
 
-import androidovshchik.webcomponents.models.Batch
 import androidovshchik.webcomponents.models.WebBrowser
 import androidovshchik.webcomponents.models.WebPage
+import androidovshchik.webcomponents.models.WebProxy
 
 interface IWebCompatView {
 
     val browser: WebBrowser
 
-    val page: WebPage
+    var page: WebPage
 
     val history: ArrayList<out WebPage>
+
+    var proxy: WebProxy?
+
+    var userAgent: String
 
     val listeners: HashSet<IWebViewListener>
 
@@ -26,7 +30,11 @@ interface IWebCompatView {
      */
     fun onResume()
 
-    fun load(input: Batch)
+    fun get(url: CharSequence?, headers: Map<String, String>): String?
+
+    fun post(url: CharSequence?, headers: Map<String, String>): String?
+
+    fun load(data: CharSequence?, baseHref: CharSequence? = null)
 
     fun reload()
 

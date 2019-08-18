@@ -5,3 +5,9 @@
 
 package androidovshchik.webcomponents.models
 
+enum class WebBrowser {
+    NATIVE,
+    CROSSWALK,
+    GECKO,
+    SERVO
+}
