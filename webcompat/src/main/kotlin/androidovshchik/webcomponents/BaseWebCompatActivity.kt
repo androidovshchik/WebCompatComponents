@@ -15,33 +15,33 @@ import androidovshchik.webcomponents.appcompat.R
 import androidovshchik.webcomponents.extensions.addWebViewListener
 import androidovshchik.webcomponents.extensions.openBrowser
 import androidovshchik.webcomponents.extensions.showToast
-import androidovshchik.webcomponents.models.WebPage
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActivity {
+abstract class BaseWebCompatActivity : AppCompatActivity(), IWebCompatActivity {
 
-    abstract var webLayout: BaseAppCompatWebLayout
+    abstract var webLayout: BaseWebCompatLayout
 
     override var isReady = true
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (intent.getBooleanExtra(EXTRA_DYNAMIC_TITLE, false)) {
-            webLayout.addWebViewListener {
-                onPageFinished {
-                    title = it.title
-                }
-            }
-        }
-    }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         if (intent.getBooleanExtra(EXTRA_ARROW_BACK, true)) {
             supportActionBar?.apply {
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
+            }
+        }
+        webLayout.apply {
+            enableSwipeLayout = intent.getBooleanExtra(EXTRA_SWIPE_LAYOUT, true)
+            enableProgressBar = intent.getBooleanExtra(EXTRA_PROGRESS_BAR, true)
+            accentColor = intent.getIntExtra(EXTRA_ACCENT_COLOR, true)
+            if (intent.getBooleanExtra(EXTRA_DYNAMIC_TITLE, false)) {
+                addWebViewListener {
+                    onPageFinished {
+                        title = it.title
+                    }
+                }
             }
         }
         super.onPostCreate(savedInstanceState)
@@ -55,7 +55,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
     }
 
     override fun onReadyEvent() {
-        webLayout.load(intent.getStringExtra(EXTRA_INPUT_DATA) ?: WebPage.BLANK_PAGE)
+        webLayout.load(intent.getStringExtra(EXTRA_INPUT_DATA))
     }
 
     override fun onFatalError() {
@@ -64,7 +64,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (intent.getBooleanExtra(EXTRA_OPTIONS_MENU, true)) {
-            menuInflater.inflate(R.menu.web_activity_menu, menu)
+            menuInflater.inflate(R.menu.web_compat_menu, menu)
             return super.onCreateOptionsMenu(menu)
         }
         return false
@@ -97,7 +97,7 @@ abstract class BaseAppCompatWebActivity : AppCompatActivity(), IAppCompatWebActi
             }
             R.id.action_share_link -> {
                 ShareCompat.IntentBuilder.from(this)
-                    .setChooserTitle(R.string.web_activity_action_share_via)
+                    .setChooserTitle(R.string.web_compat_action_share_via)
                     .setType("text/plain")
                     .setText(webLayout.page.url)
                     .startChooser()

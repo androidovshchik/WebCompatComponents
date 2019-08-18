@@ -4,7 +4,7 @@
  */
 
 include ':sample'
-include ':appcompat'
+include ':webcompat'
 include ':browsers:crosswalk'
 include ':browsers:gecko'
 include ':browsers:servo'

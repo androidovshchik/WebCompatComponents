@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ AppCompatWebComponents (https://github.com/androidovshchik/AppCompatWebComponents)
+  ~ Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,ExtraTranslation">
+    <string name="web_compat_menu_reload_page">Refresh page</string>
+    <string name="web_compat_menu_copy_link">Copy link</string>
+    <string name="web_compat_menu_share_link">Share link</string>
+    <string name="web_compat_menu_open_browser">Open in browser</string>
+    <string name="web_compat_action_share_via">Share via</string>
+</resources>

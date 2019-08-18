@@ -10,7 +10,7 @@ import android.graphics.Bitmap
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 open class WebPage {
 
-    var url = BLANK_PAGE
+    var url = ""
 
     var code = 0
 
@@ -35,10 +35,5 @@ open class WebPage {
             icon?.recycle()
         } catch (e: Throwable) {
         }
-    }
-
-    companion object {
-
-        const val BLANK_PAGE = "about:blank"
     }
 }

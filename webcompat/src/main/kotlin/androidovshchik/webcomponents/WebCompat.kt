@@ -16,54 +16,54 @@ class WebCompat {
     @Suppress("MemberVisibilityCanBePrivate")
     open class IntentBuilder(context: Context) {
 
-        val intent = Intent(context, Class.forName("${javaClass.`package`}.AppCompatWebActivity"))
+        val intent = Intent(context, Class.forName("${javaClass.`package`}.WebCompatActivity"))
 
         open fun inputData(data: CharSequence?) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_INPUT_DATA, data.toString())
+            intent.putExtra(BaseWebCompatActivity.EXTRA_INPUT_DATA, data.toString())
         }
 
         open fun dynamicTitle(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_DYNAMIC_TITLE, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_DYNAMIC_TITLE, enable)
         }
 
         open fun arrowBack(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_ARROW_BACK, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_ARROW_BACK, enable)
         }
 
         open fun navigateBack(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_NAVIGATE_BACK, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_NAVIGATE_BACK, enable)
         }
 
         open fun optionsMenu(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_OPTIONS_MENU, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_OPTIONS_MENU, enable)
         }
 
         open fun menuReload(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_MENU_RELOAD, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_MENU_RELOAD, enable)
         }
 
         open fun menuCopy(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_MENU_COPY, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_MENU_COPY, enable)
         }
 
         open fun menuShare(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_MENU_SHARE, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_MENU_SHARE, enable)
         }
 
         open fun menuBrowser(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_MENU_BROWSER, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_MENU_BROWSER, enable)
         }
 
         open fun swipeLayout(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_SWIPE_LAYOUT, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_SWIPE_LAYOUT, enable)
         }
 
         open fun progressBar(enable: Boolean) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_PROGRESS_BAR, enable)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_PROGRESS_BAR, enable)
         }
 
         open fun accentColor(color: Int) = apply {
-            intent.putExtra(BaseAppCompatWebActivity.EXTRA_ACCENT_COLOR, color)
+            intent.putExtra(BaseWebCompatActivity.EXTRA_ACCENT_COLOR, color)
         }
 
         open fun startActivity(context: Context?) = context?.tryStartActivity(intent)

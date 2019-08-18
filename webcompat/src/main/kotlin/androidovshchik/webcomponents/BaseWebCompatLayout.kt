@@ -18,11 +18,11 @@ import androidovshchik.webcomponents.models.WebPage
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 @Suppress("LeakingThis", "MemberVisibilityCanBePrivate")
-abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
+abstract class BaseWebCompatLayout : FrameLayout, IWebCompatLayout {
 
-    abstract var webView: IAppCompatWebView
+    abstract var webCompatView: IWebCompatView
 
-    val swipeRefreshLayout = SwipeRefreshLayout(context).apply {
+    val swipeLayout = SwipeRefreshLayout(context).apply {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
     }
 
@@ -36,17 +36,35 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
 
     override val page: WebPage
         get() {
-            return webView.page
+            return webCompatView.page
         }
 
     override val history: ArrayList<out WebPage>
         get() {
-            return webView.history
+            return webCompatView.history
         }
 
     override val listeners: HashSet<IWebViewListener>
         get() {
-            return webView.listeners
+            return webCompatView.listeners
+        }
+
+    override var enableSwipeLayout = true
+        set(value) {
+            field = value
+
+        }
+
+    override var enableProgressBar = true
+        set(value) {
+            field = value
+
+        }
+
+    override var accentColor: Int
+        set(value) {
+            field = value
+
         }
 
     @JvmOverloads
@@ -55,7 +73,7 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
         attrs,
         defStyleAttr
     ) {
-        init(BaseAppCompatWebLayout::class.java)
+        init(BaseWebCompatLayout::class.java)
     }
 
     @Suppress("unused")
@@ -66,33 +84,33 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
         defStyleAttr,
         defStyleRes
     ) {
-        init(BaseAppCompatWebLayout::class.java)
+        init(BaseWebCompatLayout::class.java)
     }
 
-    open fun init(clss: Class<out IAppCompatWebView>) {
+    open fun init(clss: Class<out IWebCompatView>) {
         frameLayout.addView(progressBar)
-        swipeRefreshLayout.addView(frameLayout)
-        addView(swipeRefreshLayout)
+        swipeLayout.addView(frameLayout)
+        addView(swipeLayout)
     }
 
     override fun onResume() {
-        webView.onResume()
+        webCompatView.onResume()
     }
 
     override fun load(data: CharSequence?) {
-        webView.load(data)
+        webCompatView.load(data)
     }
 
     override fun reload() {
-        webView.reload()
+        webCompatView.reload()
     }
 
     override fun navigate(steps: Int): Boolean {
-        return webView.navigate(steps)
+        return webCompatView.navigate(steps)
     }
 
     override fun onPause() {
-        webView.onPause()
+        webCompatView.onPause()
     }
 
     override fun onDestroy() {
@@ -102,7 +120,10 @@ abstract class BaseAppCompatWebLayout : FrameLayout, IAppCompatWebView {
             } catch (e: Exception) {
             }
         }
-        webView.onDestroy()
+        synchronized(this) {
+            listeners.clear()
+        }
+        webCompatView.onDestroy()
     }
 
     override fun hasOverlappingRendering(): Boolean {
