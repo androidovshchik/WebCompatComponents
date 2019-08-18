@@ -3,6 +3,12 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-include ':appcompat', ':sample',
-   ':browsers:crosswalk', ':browsers:gecko', ':browsers:servo', ':browsers:native',
-   ':engines:duktape', ':engines:jsevaluator', ':engines:j2v8'
+include ':sample'
+include ':appcompat'
+include ':browsers:crosswalk'
+//include ':browsers:gecko'
+include ':browsers:servo'
+include ':browsers:native'
+include ':engines:duktape'
+include ':engines:jsevaluator'
+include ':engines:j2v8'

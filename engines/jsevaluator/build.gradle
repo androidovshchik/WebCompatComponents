@@ -7,5 +7,11 @@ apply from: "$rootDir/module.gradle"
 apply from: "$rootDir/publish.gradle"
 
 dependencies {
+}
 
+afterEvaluate {
+    generateDebugBuildConfig.enabled = false
+    generateReleaseBuildConfig.enabled = false
+    generateDebugResValues.enabled = false
+    generateReleaseResValues.enabled = false
 }

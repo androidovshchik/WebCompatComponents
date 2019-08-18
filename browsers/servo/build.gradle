@@ -9,3 +9,10 @@ apply from: "$rootDir/publish.gradle"
 dependencies {
     implementation project(':appcompat')
 }
+
+afterEvaluate {
+    generateDebugBuildConfig.enabled = false
+    generateReleaseBuildConfig.enabled = false
+    generateDebugResValues.enabled = false
+    generateReleaseResValues.enabled = false
+}

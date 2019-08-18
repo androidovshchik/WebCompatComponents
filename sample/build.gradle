@@ -10,10 +10,13 @@ apply plugin: 'kotlin-android-extensions'
 android {
 	compileSdkVersion compile_sdk_version
 	defaultConfig {
-		minSdkVersion min_sdk_version
+		minSdkVersion 21
 		targetSdkVersion target_sdk_version
 		versionCode version_code
 		versionName version_name
+		//missingDimensionStrategy 'crosswalk', 'core', 'shared', 'lite'
+		//missingDimensionStrategy 'gecko', 'stable', 'beta', 'nightly'
+		//missingDimensionStrategy 'abi', 'arm', 'aarch64', 'x86', 'x86_64'
 	}
 	sourceSets {
 		main.java.srcDirs += 'src/main/kotlin'
@@ -22,15 +25,36 @@ android {
 		abi {
 			enable true
 			reset()
-			include 'x86', 'armeabi-v7a'
+			include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
 			universalApk false
 		}
 	}
-	flavorDimensions "default"
+	flavorDimensions "type"
 	productFlavors {
-		full
-		shared
-		lite
+		core {
+			dimension "type"
+			matchingFallbacks = ['stable']
+		}
+		shared {
+			dimension "type"
+			matchingFallbacks = ['beta']
+		}
+		lite {
+			dimension "type"
+			matchingFallbacks = ['nightly']
+		}
+		stable {
+			dimension "type"
+			matchingFallbacks = ['core']
+		}
+		beta {
+			dimension "type"
+			matchingFallbacks = ['shared']
+		}
+		nightly {
+			dimension "type"
+			matchingFallbacks = ['lite']
+		}
 	}
     buildTypes {
         release {
@@ -53,7 +77,7 @@ dependencies {
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'com.jakewharton.timber:timber:4.7.1'
 	implementation project(':appcompat')
-	implementation project(':browsers:native')
+	implementation project(':browsers:crosswalk')
 	//implementation project(':crosswalk')
 	//implementation "androidovshchik.webcomponents:gecko:$VERSION_NAME"
 }

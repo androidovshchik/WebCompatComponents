@@ -7,27 +7,131 @@ apply from: "$rootDir/module.gradle"
 apply from: "$rootDir/publish.gradle"
 
 android {
-    flavorDimensions "abi"
+    defaultConfig {
+        minSdkVersion 21
+    }
+    flavorDimensions "gecko", "abi"
     productFlavors {
-        x86 { 
-            dimension "abi"
+        stable {
+            dimension "gecko"
+            buildConfigField("boolean", "NIGHTLY", "false")
+            buildConfigField("boolean", "BETA", "false")
         }
-        x86_64 {
-            dimension "abi"
+        beta {
+            dimension "gecko"
+            buildConfigField("boolean", "NIGHTLY", "false")
+            buildConfigField("boolean", "BETA", "true")
+        }
+        nightly {
+            dimension "gecko"
+            buildConfigField("boolean", "NIGHTLY", "true")
+            buildConfigField("boolean", "BETA", "false")
         }
         arm {
             dimension "abi"
+            buildConfigField("boolean", "AARCH64", "false")
+            buildConfigField("boolean", "X86", "false")
+            buildConfigField("boolean", "X86_64", "false")
         }
         aarch64 {
             dimension "abi"
+            buildConfigField("boolean", "AARCH64", "true")
+            buildConfigField("boolean", "X86", "false")
+            buildConfigField("boolean", "X86_64", "false")
+        }
+        x86 {
+            dimension "abi"
+            buildConfigField("boolean", "AARCH64", "false")
+            buildConfigField("boolean", "X86", "true")
+            buildConfigField("boolean", "X86_64", "false")
+        }
+        x86_64 {
+            dimension "abi"
+            buildConfigField("boolean", "AARCH64", "false")
+            buildConfigField("boolean", "X86", "false")
+            buildConfigField("boolean", "X86_64", "true")
         }
     }
 }
 
+configurations {
+    stableArmApi
+    stableAarch64Api
+    stableX86Api
+    stableX86_64Api
+    betaArmApi
+    betaAarch64Api
+    betaX86Api
+    betaX86_64Api
+    nightlyArmApi
+    nightlyAarch64Api
+    nightlyX86Api
+    nightlyX86_64Api
+}
+
 dependencies {
     implementation project(':appcompat')
-    x86Implementation "org.mozilla.geckoview:geckoview-nightly-x86:$gecko_version"
-    x86_64Implementation "org.mozilla.geckoview:geckoview-nightly-x86_64:$gecko_version"
-    armImplementation "org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:$gecko_version"
-    aarch64Implementation "org.mozilla.geckoview:geckoview-nightly-arm64-v8a:$gecko_version"
+    stableArmApi ("org.mozilla.geckoview:geckoview-armeabi-v7a:$gecko_version") {
+        exclude group: 'com.android.support'
+    }
+    stableAarch64Api ("org.mozilla.geckoview:geckoview-arm64-v8a:$gecko_version") {
+        exclude group: 'com.android.support'
+    }
+    stableX86Api ("org.mozilla.geckoview:geckoview-x86:$gecko_version") {
+        exclude group: 'com.android.support'
+    }
+    stableX86_64Api ("org.mozilla.geckoview:geckoview-x86_64:$gecko_version") {
+        exclude group: 'com.android.support'
+    }
+    betaArmApi ("org.mozilla.geckoview:geckoview-beta-armeabi-v7a:$gecko_beta_version") {
+        exclude group: 'com.android.support'
+    }
+    betaAarch64Api ("org.mozilla.geckoview:geckoview-beta-arm64-v8a:$gecko_beta_version") {
+        exclude group: 'com.android.support'
+    }
+    betaX86Api ("org.mozilla.geckoview:geckoview-beta-x86:$gecko_beta_version") {
+        exclude group: 'com.android.support'
+    }
+    betaX86_64Api ("org.mozilla.geckoview:geckoview-beta-x86_64:$gecko_beta_version") {
+        exclude group: 'com.android.support'
+    }
+    nightlyArmApi ("org.mozilla.geckoview:geckoview-nightly-armeabi-v7a:$gecko_nightly_version") {
+        exclude group: 'com.android.support'
+    }
+    nightlyAarch64Api ("org.mozilla.geckoview:geckoview-nightly-arm64-v8a:$gecko_nightly_version") {
+        exclude group: 'com.android.support'
+    }
+    nightlyX86Api ("org.mozilla.geckoview:geckoview-nightly-x86:$gecko_nightly_version") {
+        exclude group: 'com.android.support'
+    }
+    nightlyX86_64Api ("org.mozilla.geckoview:geckoview-nightly-x86_64:$gecko_nightly_version") {
+        exclude group: 'com.android.support'
+    }
+}
+
+afterEvaluate {
+    generateStableArmDebugResValues.enabled = false
+    generateStableArmReleaseResValues.enabled = false
+    generateStableAarch64DebugResValues.enabled = false
+    generateStableAarch64ReleaseResValues.enabled = false
+    generateStableX86DebugResValues.enabled = false
+    generateStableX86ReleaseResValues.enabled = false
+    generateStableX86_64DebugResValues.enabled = false
+    generateStableX86_64ReleaseResValues.enabled = false
+    generateBetaArmDebugResValues.enabled = false
+    generateBetaArmReleaseResValues.enabled = false
+    generateBetaAarch64DebugResValues.enabled = false
+    generateBetaAarch64ReleaseResValues.enabled = false
+    generateBetaX86DebugResValues.enabled = false
+    generateBetaX86ReleaseResValues.enabled = false
+    generateBetaX86_64DebugResValues.enabled = false
+    generateBetaX86_64ReleaseResValues.enabled = false
+    generateNightlyArmDebugResValues.enabled = false
+    generateNightlyArmReleaseResValues.enabled = false
+    generateNightlyAarch64DebugResValues.enabled = false
+    generateNightlyAarch64ReleaseResValues.enabled = false
+    generateNightlyX86DebugResValues.enabled = false
+    generateNightlyX86ReleaseResValues.enabled = false
+    generateNightlyX86_64DebugResValues.enabled = false
+    generateNightlyX86_64ReleaseResValues.enabled = false
 }
